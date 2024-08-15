@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from './config';
 
-const SERVER_URL =  process.env.REACT_APP_SERVER || "http://localhost:3001";
+const SERVER_URL =  process.env.REACT_APP_SERVER || "http://localhost:8080";
 
 function Editor() {
   const params = useParams()
@@ -40,7 +40,6 @@ function Editor() {
     instance.on("receive-changes", handleReceiveChanges)
     setSocket(instance);
 
-    fetch(`${SERVER_URL}health`)
     return () => {
       instance.disconnect()
     }
