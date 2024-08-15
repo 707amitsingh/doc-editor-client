@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from './config';
+
+const SERVER_URL =  process.env.SERVER_URL || "http://localhost:3001";
 
 function Editor() {
   const params = useParams()
@@ -15,9 +18,7 @@ function Editor() {
     if(!quillRef.current || !socket) return;
     const interval = setInterval(() => {
       // @ts-ignore
-      console.log('>>>>>>>>>>>> ', quillRef?.current.getEditor().getText())
-      // @ts-ignore
-      socket.emit('save-document', quillRef?.current.getEditor().getText())
+      socket.emit('save-document', quillRef?.current.getEditor().root.innerHTML)
     }, 1500)
 
     return () => {
@@ -35,7 +36,7 @@ function Editor() {
   }, [documentId, quillRef.current, socket])
 
   useEffect(() => {
-    const instance = io("http://localhost:3001");
+    const instance = io(SERVER_URL);
     instance.on("receive-changes", handleReceiveChanges)
     setSocket(instance)
     return () => {
@@ -56,15 +57,20 @@ function Editor() {
     socket.emit("send-changes", delta)
   };
 
-  return <div className='.editor-container'>
+  return <div className='editor-container'>
+    <div>
     <ReactQuill
       theme='snow'
       defaultValue={value}
+      modules={modules}
+      formats={formats}
       ref={quillRef}
       value={value}
       onChange={(content, delta, source, editor) => {
         handleEditorChange(content, delta, source, editor);
       }}/>
+    </div>
+
     </div>
 }
 

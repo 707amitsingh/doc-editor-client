@@ -4,14 +4,35 @@
 
 body {
   background-color: '#F3F3F3';
-  margin: 0 auto
 }
 
 .editor-container {
-  max-width: 960px;
-  min-height: 1280px;
-  padding: 1rem;
-  box-shadow: 0 0 4px rgbs(0,0,0,0.5)
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f1f3f4;
 }
+
+.ql-container {
+  min-height: 11in;
+  padding: 0.5in;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.ql-editor {
+  width: 10in;
+  min-height: 10in;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ql-toolbar {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 
 
