@@ -16,6 +16,7 @@ function Editor() {
 
   useEffect(() => {
     if(!quillRef.current || !socket) return;
+    // TODO - This logic can be improved by debouncing emit events, instead of sending message after a fix interval
     const interval = setInterval(() => {
       // @ts-ignore
       socket.emit('save-document', quillRef?.current.getEditor().root.innerHTML)
