@@ -40,7 +40,7 @@ function Editor() {
     instance.on("receive-changes", handleReceiveChanges)
     setSocket(instance);
 
-    fetch(`${SERVER_URL}/health`)
+    fetch(`${SERVER_URL}health`)
     return () => {
       instance.disconnect()
     }
