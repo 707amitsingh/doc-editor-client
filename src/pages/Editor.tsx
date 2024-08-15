@@ -36,7 +36,7 @@ function Editor() {
   }, [documentId, quillRef.current, socket])
 
   useEffect(() => {
-    const instance = io(SERVER_URL);
+    const instance = io(SERVER_URL, { transports: ['websocket'] });
     instance.on("receive-changes", handleReceiveChanges)
     setSocket(instance);
 
