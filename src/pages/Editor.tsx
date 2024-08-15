@@ -38,7 +38,9 @@ function Editor() {
   useEffect(() => {
     const instance = io(SERVER_URL);
     instance.on("receive-changes", handleReceiveChanges)
-    setSocket(instance)
+    setSocket(instance);
+
+    fetch(`${SERVER_URL}/health`)
     return () => {
       instance.disconnect()
     }
